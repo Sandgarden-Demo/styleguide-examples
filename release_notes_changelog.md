@@ -103,87 +103,107 @@ There are 3 possible types of changes:
 - Enhancements
 - Bug Fixes
 
-## Source Repo Structure and Contents
-The sandgardenhq/mono repo contains both the back-end and front-end code for Doc Holiday, it is organized into several sub-projects as follows:
+## DSPy Source Repo Codebase Analysis of Structure and Contents
+The sandgardenhq/dspy repo contains code for the DSPy project. DSPy is a framework for programming—rather than prompting—language models. It allows you to iterate fast on building modular AI systems and offers algorithms for optimizing their prompts and weights, whether you're building simple classifiers, sophisticated RAG pipelines, or Agent loops.
 
-### High-Level Structure
-mono/
- ├── README.md                   # Main repository documentation
- ├── go.mod/go.sum               # Go module dependencies
- ├── docker-compose.yaml         # Container orchestration
- ├── Procfile                    # Deployment configuration
- ├── opencode.json.example       # Configuration template
- ├── vendor/                     # Go vendor directory
- ├── js/                         # JavaScript/TypeScript workspace
- ├── sfs/                        # Go backend service (main application)
- └── kernel/                     # Shared Go libraries and utilities
- 
-### Backend Services (Go)
+### High-Level Overview
+DSPy is a declarative framework for building modular AI software that allows developers to program language models systematically rather than through brittle prompt
+engineering. The framework provides:
 
-#### SFS (/sfs/) - Main Application
+1. Modular Programming: Structured components for building AI programs
+2. Automatic Optimization: Algorithms to improve prompts and model weights
+3. Universal Compatibility: Works across different language models and providers
 
-### Frontend Application (JavaScript/TypeScript)
+### Directory Structure and Organization
+The /dspy/dspy/ directory contains the core framework organized into these key modules:
 
-#### Workspace Structure (/js/)
-  Package Manager: pnpm with workspace configuration
-  Build System: Turbo for monorepo orchestration
-  Framework: Next.js 15 with React 19
+1. Core Programming Primitives (/primitives/, /signatures/)
+    - signatures/: Declarative input/output specifications for AI tasks
+    - signature.py: Core Signature class and SignatureMeta metaclass
+    - field.py: InputField and OutputField definitions
+    - primitives/: Basic building blocks
+    - module.py: Base Module class with ProgramMeta metaclass
+    - example.py: Training example data structures
+    - prediction.py: Output data structures (Prediction, Completions)
+    - python_interpreter.py: Code execution capabilities
 
-### Mono Repo Code Changes Importance for Documentation & Release Notes
-The Doc.Holiday UI and SFS API endpoints are the most customer-facing pieces of code and therefore the most likely to require updates to the Documentation and require Release Note. The shared UI components package is equally critical since it affects the visual experience across the entire application. Any changes to connection integrations also directly impact what customers can do with the platform.
+2. Prediction Modules (/predict/) - Core AI modules that users interact with:
+    - predict.py: Basic Predict module - fundamental building block
+    - chain_of_thought.py: Step-by-step reasoning module
+    - react.py: ReAct agent with tool use capabilities
+    - program_of_thought.py: Code generation and execution
+    - best_of_n.py: Multiple completion selection
+    - refine.py: Output refinement through iteration
+    - parallel.py: Parallel execution of modules
+    - multi_chain_comparison.py: Comparison across multiple chains
 
-#### High Priority - Most Customer-Visible Code 
-1. Doc.Holiday UI (/js/apps/doc.holiday/)
-Customer Impact: Direct UI changes users see daily
-  - Dashboard components (app/(dashboard)/_components/):
-    - Navigation (LeftNav.tsx, TopNavBar.tsx)
-    - Core actions (AddConnectionButton.tsx, AddDocButton.tsx, CreateDocDialog.tsx)
-    - Content management (EditDocDialog.tsx, DocsPage.tsx)
-  - Onboarding flow (app/onboarding/):
-    - User setup experience (OnboardingSlide.tsx, setup forms)
-  - Core pages: Sources, Publications, Settings, Profile, Logs
+3. Language Model Clients (/clients/) - Abstractions for different LM providers:
+    - lm.py: Main LM class for model interaction
+    - base_lm.py: Base language model interface
+    - cache.py: Caching system for LM calls
+    - provider.py: Provider abstraction for different services
+    - databricks.py, openai.py: Specific provider implementations
+    - embedding.py: Embedding model support
 
-2. SFS API Endpoints (/sfs/sfs/internal/endpoints/)
-Customer Impact: Backend functionality powering frontend features
-  - Generated API handlers (generated_serve_*.go) - auto-generated from endpoint definitions
-  - Core endpoints (endpoints.go):
-    - Connections API: Create/manage integrations (GitHub, Zendesk, Salesforce, etc.)
-    - Automations API: Configure AI workflows and triggers
-    - Reports API: Customer analytics and insights
-    - Documents API: Content management and publishing
+4. Optimization System (/teleprompt/) - Automatic improvement algorithms:
+    - bootstrap.py: BootstrapFewShot - generates few-shot examples
+    - mipro_optimizer_v2.py: MIPROv2 - Bayesian optimization
+    - copro_optimizer.py: COPRO - coordinate ascent instruction optimization
+    - bootstrap_finetune.py: Model fine-tuning
+    - knn_fewshot.py: K-nearest neighbor example selection
+    - ensemble.py: Model ensembling
+    - simba.py: SIMBA optimizer
 
-3. Shared UI Components (/js/packages/components/)
-Customer Impact: Consistent design across all user interactions
-  - Core UI elements: Button, Dialog, Form, Input, Table
-  - Integration-specific: ConnectionIcon.tsx (visual integration indicators)
-  - Advanced components: Charts, Calendar, Dropzone, ReactFlow
+5. Data Handling (/adapters/, /datasets/):
+    - adapters/: Format conversion for different data types
+    - chat_adapter.py: Chat format handling
+    - json_adapter.py: JSON data structures
+    - types/: Custom types (Image, Audio, Tool, History)
+    - datasets/: Built-in datasets and loaders
+    - hotpotqa.py, gsm8k.py, math.py: Specific datasets
+    - dataset.py: Generic dataset interface
 
-#### Medium Priority - Indirectly Customer-Facing
-4. Integration Connection Packages (/sfs/connections/)
-Customer Impact: Features and capabilities of integrations
-  - GitHub (github/): Repository management, PR/issue tracking
-  - Zendesk (zendesk/): Ticket management, customer support workflows
-  - Salesforce (salesforce/): CRM data integration
-  - Linear (linear/): Project management integration
-  - Notion (notion/): Documentation and knowledge base
-  - Google Docs (gdocs/): Document collaboration
+6. Evaluation System (/evaluate/):
+    - evaluate.py: Main evaluation framework
+    - metrics.py: Built-in metrics (exact match, F1, etc.)
+    - auto_evaluation.py: Automatic evaluation methods
 
-5. Generated Client Libraries (/js/packages/sfs-client/, /js/packages/sfs-hooks/)
-Customer Impact: Frontend-backend communication reliability
-  - Auto-generated TypeScript clients from Go API definitions
-  - React hooks for state management and API calls
+7. Retrieval and Tools (/retrievers/, /dsp/):
+    - retrievers/: Information retrieval components
+    - embeddings.py: Vector-based retrieval
+    - retrieve.py: Generic retrieval interface
+    - dsp/: Lower-level components
+    - colbertv2.py: ColBERT retrieval system
+    - utils/settings.py: Global configuration management
 
-6. Authentication & Middleware (/sfs/middleware/, /sfs/clerk/)
-Customer Impact: Login experience and security
-  - Clerk integration for user authentication
-  - CORS, request logging, elevated access controls
+8. Supporting Infrastructure (/utils/, /streaming/):
+    - utils/: Utilities and helpers
+    - saving.py: Model/program serialization
+    - asyncify.py: Async/sync conversion
+    - callback.py: Callback system
+    - usage_tracker.py: Token/cost tracking
+    - streaming/: Real-time streaming capabilities
+    - propose/: Proposal generation for optimization
 
-#### Lower Priority - Infrastructure
-- Kernel utilities (/kernel/) - shared backend libraries
-- Database layers (/sfs/internal/dao/) - data persistence
-- Job management (/sfs/internal/jobmgr/) - background processing
-- AI/ML components (/sfs/internal/aikit/, /sfs/tensorzero/) - unless new AI features
+### Key User-Facing Areas Most Likely to Change
+Based on the codebase structure and documentation, these are the areas most likely to have user-facing changes:
 
-## Docs Repo Structure and Contents
--Docs
--Docs/docs
+1. High Priority - Direct User APIs:
+    - /predict/ modules (predict.py:20, chain_of_thought.py:10, react.py) - Core user-facing modules
+    - /signatures/signature.py:40 - Signature definition API
+    - /clients/lm.py - Language model configuration interface
+    - /teleprompt/ optimizers - User optimization workflows
+
+2. Medium Priority - Configuration & Data:
+    - /adapters/ - New data type support (Image, Audio, Tool formats)
+    - /datasets/ - Built-in dataset additions
+    - /evaluate/metrics.py - New evaluation metrics
+    - dspy/__init__.py:1 - Top-level imports and API surface
+
+3. Lower Priority - Infrastructure:
+    - /utils/ - Generally stable utility functions
+    - /dsp/utils/settings.py:42 - Configuration management
+    - /streaming/ - Streaming capabilities
+    - /clients/ provider implementations - New LM provider support
+
+The areas in /predict/, /signatures/, /teleprompt/, and /adapters/ represent the primary user interface and are where new features, modules, and capabilities would most commonly be added. These correspond directly to the documented user workflows for programming with modules, signatures, and optimizers.
