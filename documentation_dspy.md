@@ -49,7 +49,7 @@ best_of_3(question="What is the capital of Belgium?").answer
 ```
 
 Here is one more good example of how to write a short and concise description alongside the existing code snippet:
-#### Error Handling
+### Error Handling
 By default, `Refine` will try to run the module up to N times until the threshold is met. If the module encounters an error, it will keep going up to N failed attempts. You can change this behavior by setting `fail_count` to a smaller number than `N`.
 ```python
 refine = dspy.Refine(module=qa, N=3, reward_fn=one_word_answer, threshold=1.0, fail_count=1)
