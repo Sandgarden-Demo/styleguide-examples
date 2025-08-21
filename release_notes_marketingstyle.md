@@ -6,6 +6,14 @@ Add the new changes to the top of the existing file contents. Do not alter the o
 
 Here is an example of how the release notes should look before updating the file with new additional release notes:
 ```
+---
+title: Release Notes
+description: Brief description of the thing
+type: docs
+weight: 7
+---
+
+## 2025-08-01 (v3.0.0)
 ### New Features
 We have a really exciting set of new features for our flagship version 3.0.0 release today!  First and foremost it's the addition of GPT-5 as a new reasoning model option.  This lets users leverage the latest and greatest LLM that OpenAI has provided.  Alongside that, we've incorporated LiteLLM for logging management and even built a custom BAMLAdapter to improve structured outputs.  Not it will be easier than ever before to ensure your LLM outputs are structured in a way that can be consumed and evaluated by machine learning models.
 
