@@ -88,7 +88,7 @@ weight: 7
 - Use clear, concise language
 - Important: be as concise as possible
 - DO NOT use any code examples
-- Use consistent formatting for headers and lists, matching the existing formatting where possible
+- Use consistent formatting for headers and lists, matching the existing file formatting where possible
 - Include a bullet item for every user-facing change
  
 ## Specific Instructions for Writing Release Notes: Important!
