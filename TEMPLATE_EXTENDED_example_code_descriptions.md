@@ -1,4 +1,5 @@
 >[!TIP]
+>Use a code analysis tool, such as Claude Code, to analyze your code base and documentation.
 >Providing guidance on which code changes are "important", and which changes should be ignored, will improve the quality of generated documentation and release notes. Providing specific examples in relation to the structure and contents of the code repository is the most impactful, similar to the code examples of what is "good" provided above. The more examples, the better. Below is an example of a user facing code change in the DSPy project along with documentation changes describing it, followed by an analysis of the existing DSPy code base provided by Claude Code. 
 
 ## DSPy Source Repo Codebase Analysis of Structure and Contents
