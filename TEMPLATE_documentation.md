@@ -77,9 +77,9 @@ refine(question="What is the capital of Belgium?")
 
 - Use clear, concise language
 - Important: be as concise as possible
-- Include code snippet examples where appropriate
 >[!NOTE]
 >Replace this bullet with "Important! Never include code snippet examples in documentation" if you don't want to use code examples
+- Include code snippet examples where appropriate
 - Use consistent formatting for headers and lists, matching the existing formatting where possible
 - Always include a brief description for features beyond just a code snippet
 
