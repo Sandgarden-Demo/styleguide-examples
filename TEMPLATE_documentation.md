@@ -7,6 +7,9 @@ Each feature and program presented in these docs should include a brief and conc
 >[!TIP]
 >Include as many examples as possible from your actual documentation of what "good" looks like. Examples linking specific changes in code to specific updates to documentation work best. At least 3 examples is recommended. Including your specific examples at the top of the style guide will give them the strongest impact.
 
+>[!NOTE]
+>These examples are for demonstration purposes only, either replace them with elevant examples from your own project or delete them. If deleting, remove from this Note block to the next one.
+
 Here is a good example of what it would look like:
 
 This shows how to perform an easy out-of-the box run with `auto=light`, which configures many hyperparameters for you and performs a light optimization run. You can alternatively set `auto=medium` or `auto=heavy` to perform longer optimization runs.
@@ -60,20 +63,29 @@ refine = dspy.Refine(module=qa, N=3, reward_fn=one_word_answer, threshold=1.0, f
 refine(question="What is the capital of Belgium?")
 # If we encounter just one failed attempt, the module will raise an error.
 ```
+>[!NOTE]
+>Delete up to this note block, if you are not replacing with your own examples.
+
+## General Writing Guidelines
 
 >[!TIP]
 >Here is where the voice and style guidelines are established. Adjust to fit your needs. Using "Important" as an emphasizer helps make sure certain instructions are carefully followed. Make sure to cover topics like 1) structure and formatting, 2) types of content to include (like starting with an overview and ending with throubleshooting tips, etc.), and 3) style of voice and language to use (like concise vs. explanatory, or technical vs. non-technical, etc.).
 
-## General Writing Guidelines
+
 - Use clear, concise language
 - Important: be as concise as possible
 - Include code snippet examples where appropriate
+>[!NOTE]
+>Replace this bullet with "Important! Never include code snippet examples in documentation" if you don't want to use code examples
 - Use consistent formatting for headers and lists, matching the existing formatting where possible
 - Always include a brief description for features beyond just a code snippet
 
 >[!TIP]
 >If including code examples is an useful part of the documentation, provide guidelines for their structure and format. It's also possible to forbid Doc Holiday from generating code examples and only generating text. 
- 
+
+>[!NOTE]
+>Remove these next three bullets if you do not want to include code snippet examples in your documentation.
+
 ## General Code Snippet Example Guidelines
 - Use syntax highlighting
 - Include comments for complex logic
@@ -90,6 +102,9 @@ refine(question="What is the capital of Belgium?")
 
 >[!TIP]
 >Providing guidance on which changes are "important", and which changes should be ignored is important. Providing specific examples in relation to the structure and contents of the code repository is the most impactful, similar to the code examples of what is "good" provided above. The more examples, the better.
+
+>[!NOTE]
+>The entire rest of this style guide involves descriptions of the project code base and project documentation, along with examples specific to the DSPy project. If you are not replacing them with analagous descriptions and examples of your own project code base and project documentation, delete the rest of the style guide contents from this Note block and below.
 
 ## DSPy Source Repo Codebase Analysis of Structure and Contents
 The sandgardenhq/dspy repo contains code for the DSPy project. DSPy is a framework for programming—rather than prompting—language models. It allows you to iterate fast on building modular AI systems and offers algorithms for optimizing their prompts and weights, whether you're building simple classifiers, sophisticated RAG pipelines, or Agent loops.
