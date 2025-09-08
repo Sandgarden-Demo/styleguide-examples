@@ -10,8 +10,10 @@ Each feature and program presented in these docs should include a brief and conc
 >[!TIP]
 >Include as many examples as possible from your actual documentation of what "good" looks like. Examples linking specific changes in code to specific updates to documentation work best. At least 3 examples is recommended. Including your specific examples at the top of the style guide will give them the strongest impact.
 
->[!NOTE]
->These examples are for demonstration purposes only, either replace them with elevant examples from your own project or delete them. If deleting, remove from this Note block to the next one.
+>[!WARNING]
+>Replace the following 3 examples with one of your own.
+
+**Example 1**
 
 Here is a good example of what it would look like:
 
@@ -41,6 +43,8 @@ print(f"Evaluate optimized program...")
 evaluate(optimized_program, devset=devset[:])
 ```
 
+**Example 2**
+
 Here is an additional good example of how to write a short and concise description alongside the existing code snippet:
 
 ### Refine
@@ -57,7 +61,10 @@ best_of_3(question="What is the capital of Belgium?").answer
 # Brussels
 ```
 
+**Example 3**
+
 Here is one more good example of how to write a short and concise description alongside the existing code snippet:
+
 ### Error Handling
 By default, `Refine` will try to run the module up to N times until the threshold is met. If the module encounters an error, it will keep going up to N failed attempts. You can change this behavior by setting `fail_count` to a smaller number than `N`.
 ```python
@@ -66,8 +73,6 @@ refine = dspy.Refine(module=qa, N=3, reward_fn=one_word_answer, threshold=1.0, f
 refine(question="What is the capital of Belgium?")
 # If we encounter just one failed attempt, the module will raise an error.
 ```
->[!NOTE]
->Delete up to this note block, if you are not replacing with your own examples.
 
 ## General Writing Guidelines
 
@@ -104,4 +109,4 @@ refine(question="What is the capital of Belgium?")
 - Important: only focus on the most important and user-facing changes, ignore internally-facing updates like dependency changes and adjustments to the CI/CD pipeline.
 
 >[!TIP]
->Providing guidance on which changes are "important", and which changes should be ignored is important. Providing specific examples in relation to the structure and contents of the code repository is the most impactful, similar to the code examples of what is "good" provided above. The more examples, the better.
+>Providing a description of your code base and documentation, using a tool like Claude Code, improves the output of Doc Holiday. For examples of that kind of code analysis, check out this file: https://github.com/Sandgarden-Demo/styleguide-examples/blob/main/TEMPLATE_EXTENDED_example_code_descriptions.md
